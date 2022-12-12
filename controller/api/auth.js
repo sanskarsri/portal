@@ -1,5 +1,6 @@
 const router = require("express").Router();
 var jwt = require('jsonwebtoken');
+const { ObjectId } = require("mongodb");
 
 // model
 const User = require("../../models/User");
@@ -9,7 +10,7 @@ router.get("/", async (req, res) => {
     const token = req.cookies.token;
     const verifyToken = jwt.verify(token,"secret");
 
-    const isUser = await User.findOne({_id:verifyToken});
+    const isUser = await User.findOne({_id:ObjectId(verifyToken)});
 
     if (!isUser) {
       return res.status(400).json({

@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const saltRounds = 10;
-const myPlaintextPassword = "usedforhash";
+// const saltRounds = 10;
+// const myPlaintextPassword = "usedforhash";
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 // model
