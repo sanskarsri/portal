@@ -6,7 +6,7 @@ class Dashboard extends Component {
 
   handleAuth = async () => {
 
-  const res = await fetch("/isUserAuth" , {
+  const res = await fetch("/api/isUserAuth" , {
     method: "GET",
     headers: {
         "Content-Type": "application/json"

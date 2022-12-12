@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config()
 const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
@@ -17,20 +19,22 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-mongoose.connect('mongodb+srv://sanskar:database.find()@firstdatabase.5taea.mongodb.net/registerid',{useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URL,{useNewUrlParser: true});
 
   const registerSchema = new mongoose.Schema({
     name: String,
     email: String,
     phone: String,
-    password: String
+    password: String,
+    batch: String,
+    card: String
  });
 
   const Post = mongoose.model("post",registerSchema);
 
 
 
-app.post("/data",function(req,res){
+app.post("/api/data",function(req,res){
 
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(req.body.password, salt);  
@@ -40,7 +44,9 @@ app.post("/data",function(req,res){
         name: req.body.fname,
         email: req.body.email,
         phone: req.body.phone,
-        password: hash
+        password: hash,
+        batch: req.body.batch,
+        card: req.body.card,
       });
 
     val.save(function(err)
@@ -52,7 +58,7 @@ app.post("/data",function(req,res){
 
 });
 
-app.get("/isUserAuth", function(req,res){
+app.get("/api/isUserAuth", function(req,res){
 
   try{
     const token = req.cookies.token;
@@ -71,7 +77,7 @@ app.get("/isUserAuth", function(req,res){
   }
 });
 
-app.post("/login",function(req,res){
+app.post("/api/login",function(req,res){
 
     // res.status(201).json({message: "Login tried"});
      Post.findOne({email: req.body.email}, function(err,foundUser){

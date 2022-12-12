@@ -185,7 +185,7 @@ class Register extends Component {
     const batch = this.state.registerForm.batch.value;
     const card = this.state.registerForm.card.value;
     // console.log(fname);
-    const res = await fetch("/data", {
+    const res = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
