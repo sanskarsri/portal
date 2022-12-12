@@ -1,0 +1,6 @@
+body {
+    font-family: $font-family-base;
+    @include noise();
+    background-color: $brand-color !important;
+    color: $brand-text-color;
+}
