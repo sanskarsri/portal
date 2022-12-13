@@ -41,12 +41,14 @@ class Dashboard extends Component {
     const data = await res.json();
     if (data.success == true) 
     {
-      this.state.users = data.users;
-      this.state.a_count=data.a_count;
-      this.state.b_count=data.b_count;
-      this.state.c_count=data.c_count;
-      this.state.d_count=data.d_count;
-      this.setState({data});
+      
+      this.setState({
+        users :  data.users,
+        a_count: data.a_count,
+        b_count: data.b_count,
+        c_count: data.c_count,
+        d_count: data.d_count,
+      });
     }
   };
 
