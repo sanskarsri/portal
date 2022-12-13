@@ -38,7 +38,7 @@ let UserSchema = mongoose.Schema(
     },
     age: {
       type: Number, 
-      min: 16,
+      min: 18,
       max: 65,
       required: true,
     },

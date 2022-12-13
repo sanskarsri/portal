@@ -60,6 +60,12 @@ class Register extends Component {
         valid: false,
         focused: false,
         messageClassName: "none",
+      },
+      age:{
+        value: 0,
+        valid: false,
+        focused: false,
+        messageClassName: "none",
       }
     },
     formIsValid: false,
@@ -185,6 +191,7 @@ class Register extends Component {
     const confirmPassword = this.state.registerForm.confirmPassword.value;
     const batch = this.state.registerForm.batch.value;
     const card = this.state.registerForm.card.value;
+    const age = this.state.registerForm.age.value;
 
     if(password!=confirmPassword)
     {
@@ -198,7 +205,7 @@ class Register extends Component {
         "Content-Type": "application/json",
       },
 
-      body: JSON.stringify({ fname, email, phone, password, batch, card }),
+      body: JSON.stringify({ fname, email, phone, password, batch, card, age }),
     });
 
     const data = await res.json();
@@ -410,6 +417,40 @@ class Register extends Component {
                       registerForm.confirmPassword.messageClassName
                     }
                   />
+
+                  
+                  <Input
+                    label="Age"
+                    attributes={{
+                      type: "number",
+                      required: true,
+                      theme: "default",
+                      value: registerForm.age.value,
+                      onChange: (event) =>
+                        this.handleInputOnChange(event, "age", {
+                          required: true,
+                          isAge: true,
+                        }),
+                      onFocus: () =>
+                        this.handleInputFocus("age", {
+                          focused: true,
+                        }),
+                      onBlur: () =>
+                        this.handleInputFocus("age", {
+                          focused: false,
+                        }),
+                    }}
+                    hasError={!registerForm.age.valid}
+                    focused={registerForm.age.focused}
+                    message={
+                      !registerForm.age.valid &&
+                      !registerForm.age.focused &&
+                      registerForm.age.value !== ""
+                        ? "Your name must be between 18 to 65 years!"
+                        : ""
+                    }
+                    messageClassName={registerForm.age.messageClassName}
+                  />
                   <div class="input__group input__theme--default">
                     <Label>Batch *</Label>
 
@@ -573,12 +614,18 @@ class Register extends Component {
                 />
                 <FormMarker
                   num={6}
+                  text="Age"
+                  value={registerForm.age.value}
+                  valid={registerForm.age.valid}
+                />
+                <FormMarker
+                  num={7}
                   text="Select Batch"
                   value={registerForm.batch.value}
                   valid={registerForm.batch.valid}
                 />
                 <FormMarker
-                  num={7}
+                  num={8}
                   text="Card Details"
                   value={registerForm.card.value}
                   valid={registerForm.card.valid}

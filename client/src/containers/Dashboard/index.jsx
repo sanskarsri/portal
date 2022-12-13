@@ -20,8 +20,9 @@ class Dashboard extends Component {
     });
 
     const data = await res.json();
-    if (data.auth == "true") this.props.history.push("/dashboard");
-    else this.props.history.push("/login");
+    if (data.auth == "false") 
+    // this.props.history.push("/dashboard");
+      this.props.history.push("/login");
   };
 
   getUsers = async () => {
@@ -44,6 +45,12 @@ class Dashboard extends Component {
   };
 
   render() {
+    const users = this.state.users;
+    const a_count=this.state.a_count;
+    const b_count=this.state.b_count;
+    const c_count=this.state.c_count;
+    const d_count=this.state.d_count;
+
     return (
       <>
         <Helper handleAuth={this.handleAuth} getUsers={this.getUsers} />
@@ -54,11 +61,12 @@ class Dashboard extends Component {
             </div>
             <div className="register__title">Batch 5 - 6 AM</div>
 
-            {this.state.a_count > 0 ? (
+            {a_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {this.state.users.map((ele) =>
+                {users.map((ele,i) =>
                   ele.batch === "1" ? (
                     <div
+                      key={i}
                       className="Button Button--brand--uncheck"
                       style={{ minWidth: "auto" }}
                     >
@@ -76,11 +84,12 @@ class Dashboard extends Component {
               </div>
             )}
             <div className="register__title">Batch 6 - 7 AM</div>
-            {this.state.b_count > 0 ? (
+            {b_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {this.state.users.map((ele) =>
+                {users.map((ele,i) =>
                   ele.batch === "2" ? (
                     <div
+                      key={i}
                       className="Button Button--brand--uncheck"
                       style={{ minWidth: "auto" }}
                     >
@@ -98,11 +107,12 @@ class Dashboard extends Component {
               </div>
             )}
             <div className="register__title">Batch 7 - 8 AM</div>
-            {this.state.c_count > 0 ? (
+            {c_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {this.state.users.map((ele) =>
+                {users.map((ele,i) =>
                   ele.batch === "3" ? (
                     <div
+                      key={i}
                       className="Button Button--brand--uncheck"
                       style={{ minWidth: "auto" }}
                     >
@@ -120,11 +130,12 @@ class Dashboard extends Component {
               </div>
             )}
             <div className="register__title">Batch 5 - 6 PM</div>
-            {this.state.d_count > 0 ? (
+            {d_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {this.state.users.map((ele) =>
+                {users.map((ele,i) =>
                   ele.batch === "4" ? (
                     <div
+                      key={i}
                       className="Button Button--brand--uncheck"
                       style={{ minWidth: "auto" }}
                     >

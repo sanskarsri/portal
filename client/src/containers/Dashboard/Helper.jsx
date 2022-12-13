@@ -3,8 +3,8 @@ import { useEffect } from "react";
 
 function Helper(props) {
     useEffect(()=>{
-        props.handleAuth()
         props.getUsers()
+        props.handleAuth()
       },[])
     return (
     null
