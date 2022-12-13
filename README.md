@@ -8,7 +8,7 @@ Registration is done from the '/register' route. Where the inputs are validated 
 - Also a ER digram is also added.
 
 ## ER Digram: 
-![Image](https://github.com/sanskarsri/portal/blob/main/ER-diagram.jpg)
+<img src="ER-diagram.jpg" width=500 />
 
 ## Additional:
 - Login portal helps the user to login and access further details.
