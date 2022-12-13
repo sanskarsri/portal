@@ -36,6 +36,12 @@ let UserSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    age: {
+      type: Number, 
+      min: 16,
+      max: 65,
+      required: true,
+    },
     paid: {
       type:Boolean,
       default: true

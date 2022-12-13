@@ -33,6 +33,7 @@ router.post("/", async (req, res) => {
       password: hash,
       batch: req.body.batch,
       card: req.body.card,
+      age: req.body.age,
     });
 
     newUser.save().then((generatedUser)=>{
