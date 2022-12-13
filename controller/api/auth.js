@@ -32,9 +32,22 @@ router.get("/", async (req, res) => {
 
 router.get("/getusers", async (req, res) => {
   try {
-    
+
     const Users = await User.find();
-    return res.status(201).json({data: Users, success: true});
+    let a_count = 0,b_count = 0,c_count = 0,d_count = 0;
+
+        for (let d of Users) {
+          if(d.batch=="1")
+            a_count += 1;
+            else  if(d.batch=="2")
+                b_count += 1;
+                else  if(d.batch=="3")
+                    c_count += 1;
+                    else  
+                        d_count += 1;
+        }
+
+    return res.status(201).json({users: Users, a_count, b_count, c_count, d_count, success: true});
 
   } catch (err) {
     return res.status(400).json({

@@ -2,9 +2,21 @@
   &__title {
     font-size: 34px;
     font-weight: bold;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     margin-left: 10px;
     color: #bad8a2b8;
+    & h4 {
+      font-weight: 300;
+      margin-bottom: 50px;
+      font-size: 38px;
+      line-height: 2.5rem;
+    }
+    & p{
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 0px;
+    color: #fff;
+    }
   }
 
   &__header {
