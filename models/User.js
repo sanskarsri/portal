@@ -36,6 +36,10 @@ let UserSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    paid: {
+      type:Boolean,
+      default: true
+    }
   },
   {
     timestamps: true,

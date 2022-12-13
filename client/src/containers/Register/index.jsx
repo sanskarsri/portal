@@ -67,7 +67,7 @@ class Register extends Component {
 
   handleInputOnChange = (event, elementId, validations) => {
     const value = event.target.value;
-    console.log(value, event);
+    // console.log(value, event);
 
     const updatedFormElement = {
       ...this.state.registerForm[elementId],
@@ -182,8 +182,15 @@ class Register extends Component {
     const email = this.state.registerForm.email.value;
     const phone = this.state.registerForm.phone.value;
     const password = this.state.registerForm.password.value;
+    const confirmPassword = this.state.registerForm.confirmPassword.value;
     const batch = this.state.registerForm.batch.value;
     const card = this.state.registerForm.card.value;
+
+    if(password!=confirmPassword)
+    {
+      alert("Password doesn't match");
+      return;
+    }
     // console.log(fname);
     const res = await fetch("/api/register", {
       method: "POST",
@@ -195,8 +202,12 @@ class Register extends Component {
     });
 
     const data = await res.json();
-
-    this.props.history.push("/login");
+    if(data.success)
+        this.props.history.push("/login");
+    else
+    {
+      alert(data.error);
+    }
   };
 
   render() {

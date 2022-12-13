@@ -3,9 +3,11 @@ const saltRounds = 10;
 // const myPlaintextPassword = "usedforhash";
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+// const { ObjectId } = require("mongodb");
 
 // model
 const User = require("../../models/User");
+const Batch = require("../../models/Batch");
 
 
 router.post("/", async (req, res) => {
@@ -33,8 +35,16 @@ router.post("/", async (req, res) => {
       card: req.body.card,
     });
 
-    newUser.save();
-    return res.status(201).json({ message: "User Registered" });
+    newUser.save().then((generatedUser)=>{
+      const enrollment = new Batch({
+        id: generatedUser._id,
+        batch: req.body.batch,
+      });
+      enrollment.save();
+    });
+
+    
+    return res.status(201).json({ message: "User Registered" ,success: true});
 
   } catch (err) {
     return res.status(400).json({

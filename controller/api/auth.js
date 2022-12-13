@@ -30,4 +30,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/getusers", async (req, res) => {
+  try {
+    
+    const Users = await User.find();
+    return res.status(201).json({data: Users, success: true});
+
+  } catch (err) {
+    return res.status(400).json({
+      success: false,
+      error: err.message,
+    });
+  }
+});
+
 module.exports = router;
