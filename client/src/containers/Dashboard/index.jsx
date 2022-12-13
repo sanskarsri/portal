@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Layout from "../../components/Layout";
-import Helper from "./Helper";
 
 class Dashboard extends Component {
   state = {
@@ -10,6 +9,12 @@ class Dashboard extends Component {
     c_count: 0,
     d_count: 0,
   };
+
+  
+  a_count=0;
+  b_count=0;
+  c_count=0;
+  d_count=0;
 
   handleAuth = async () => {
     const res = await fetch("/api/isUserAuth", {
@@ -41,29 +46,29 @@ class Dashboard extends Component {
       this.state.b_count=data.b_count;
       this.state.c_count=data.c_count;
       this.state.d_count=data.d_count;
+      this.setState({data});
     }
   };
 
+  componentDidMount()
+  {
+    this.handleAuth();
+    this.getUsers();
+  }
+
   render() {
-    const users = this.state.users;
-    const a_count=this.state.a_count;
-    const b_count=this.state.b_count;
-    const c_count=this.state.c_count;
-    const d_count=this.state.d_count;
 
     return (
       <>
-        <Helper handleAuth={this.handleAuth} getUsers={this.getUsers} />
         <Layout>
           <div className="register">
             <div className="register__title">
               <h4>Dashboard</h4>
             </div>
             <div className="register__title">Batch 5 - 6 AM</div>
-
-            {a_count > 0 ? (
+            {this.state.a_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {users.map((ele,i) =>
+                {this.state.users.map((ele,i) =>
                   ele.batch === "1" ? (
                     <div
                       key={i}
@@ -84,9 +89,9 @@ class Dashboard extends Component {
               </div>
             )}
             <div className="register__title">Batch 6 - 7 AM</div>
-            {b_count > 0 ? (
+            {this.state.b_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {users.map((ele,i) =>
+                {this.state.users.map((ele,i) =>
                   ele.batch === "2" ? (
                     <div
                       key={i}
@@ -107,9 +112,9 @@ class Dashboard extends Component {
               </div>
             )}
             <div className="register__title">Batch 7 - 8 AM</div>
-            {c_count > 0 ? (
+            {this.state.c_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {users.map((ele,i) =>
+                {this.state.users.map((ele,i) =>
                   ele.batch === "3" ? (
                     <div
                       key={i}
@@ -130,9 +135,9 @@ class Dashboard extends Component {
               </div>
             )}
             <div className="register__title">Batch 5 - 6 PM</div>
-            {d_count > 0 ? (
+            {this.state.d_count > 0 ? (
               <div className="d-flex flex-wrap" style={{ gridGap: "30px",marginBottom:"20px" }}>
-                {users.map((ele,i) =>
+                {this.state.users.map((ele,i) =>
                   ele.batch === "4" ? (
                     <div
                       key={i}
